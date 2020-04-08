@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"  name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>熊猫代售处 - 熊猫王者专区</title>
+	<meta name="keywords" content="王者账号">
+	<meta name="description" content="王者选购">
+
+	<link rel="stylesheet" href="css/weui.min_1.css">
+	<link rel="stylesheet" href="css/jquery-weui_1.css">
+	<link rel="stylesheet" href="css/demos_1.css">
+	<script src="js/jquery.min_1.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.4_1.js"></script>
+	<script type="text/javascript" src="js/jquery-weui_1.js"></script>
+	<script src="js/jquery.cookie_1.js"></script>
+	<script src="js/layer_1.js"></script>
+	<style type="text/css">
+		#cnmmmm{
+			font-size: 14px;
+			color: red;
+		}
+	</style>
+</head>
+
+<body ontouchstart>
+	<header class='demos-header' style="padding: 30px 0;padding-bottom: 0px;">
+		<h1 class="demos-title">
+		熊猫代售处			<p style="font-size: 16px;color: #a18a8a;">预留QQ可直接填写换绑手机号，付款后账号密码保存好！联系客服进行换绑。<br>
+
+		</h1>
+	</header>
+	<form id="frm" role="form" method="post" action="confirm.php">
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell weui-cell_select">
+				<div class="weui-cell__hd" style="padding-left:15px">
+					<label class="weui-label">商品分类</label>
+				</div>
+				<div class="weui-cell__bd" >
+					<select class="weui-select" id="goodstype" onchange="getgoodslist(this.value)" style="padding-left:0px" onmouseleave="myMouseLeave()">
+								                        <option value="1" selected>主推388</option>
+		                		                        <option value="2" >688区</option>
+		                		                        <option value="3" >358区</option>
+		                		                        <option value="4" >288类区</option>
+
+
+		                					</select>
+				</div>
+			</div>
+			<div class="weui-cell weui-cell_select">
+				<div class="weui-cell__hd" style="padding-left:15px">
+					<label class="weui-label">商品名称</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input class="weui-select" id="goodsshow" onchange="getgoodsmsg()" style="padding-left:0px" readonly="readonly">
+
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<label class="weui-label">产品描述</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input class="weui-select" id="cnmmmm" onchange="getgoodsmsg()" style="padding-left:0px" readonly="readonly">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<label class="weui-label">购买数量</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" onBlur="checknumber()"  name="number" id="number" value="1" type="number" placeholder="数量" readonly="readonly">
+				</div>
+
+				<div class="weui-cell__hd"  style="display:none;">
+					<label class="weui-label">库存</label>
+				</div>
+				<div class="weui-cell__bd" id="goodskc" style="display:none;"></div>
+
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">单价</label></div>
+				<div class="weui-cell__bd">
+					<span style="font-weight:bold;" id="goodsprice">￥388</span>
+				</div>
+				<div class="weui-cell__hd"><label class="weui-label">总金额</label></div>
+				<div class="weui-cell__bd">
+					<span style="color:red; font-weight:bold;" id="allmoney">388</span>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">联系QQ</label></div>
+				<div class="weui-cell__bd"><input class="weui-input" id="qq" required type="text" placeholder="请输入QQ方便我们更快联系到您"></div>
+			</div>
+
+			<div class="weui-cell" style="display:none">
+				<div class="weui-cell__hd"><label class="weui-label">提取密码</label></div>
+				<div class="weui-cell__bd"><input class="weui-input" id="paypass" type="text" placeholder="请填写您的提取密码"></div>
+			</div>
+
+			<div class="weui-cell" style="display:none">
+				<div class="weui-cell__hd"><label class="weui-label">优惠券</label></div>
+				<div class="weui-cell__bd"><input class="weui-input" id="coupon" type="text" placeholder="有券则填,无券不填"></div>
+			</div>
+                    <div class="weui-cell" style="display:none">
+				<div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
+				<div class="weui-cell__bd"><input class="weui-input" id="phone" type="text" placeholder="将卡密发送到您的手机上"></div>
+			</div>
+						<div class="weui-cell weui-cells_radio">
+				<div class="weui-cell__hd">
+					<div class="weui-label" style="padding: 10px 0px;">
+						<span class="weui-agree__text">
+							<a class="weui-btn weui-btn_mini weui-btn_primary" href="http://wpa.qq.com/msgrd?v=3&uin=2028798001&site=qq&menu=yes" target="_blank">联系客服</a>
+						</span>
+					</div>
+
+
+				</div>
+				<div class="weui-cell__bd" style="">
+					<input id="type" type="hidden" value="wxpay">
+                    <input id="typefs" type="hidden" value="微信">
+                    					<label class="weui-cell weui-check__label" for="x11" style="padding-left:0px" onclick="paytype(this,'wxpay','微信')">
+						<div class="weui-cell__bd" >
+							<img src="img/abcd.png" height="32" width="97"/>
+						</div>
+						<div class="weui-cell__ft" onclick="a()">
+							<input type="radio" class="weui-check" name="access" value="3" checked="checked" id="x11">
+							<span class="weui-icon-checked"></span>
+						</div>
+					</label>
+						<label class="weui-cell weui-check__label" for="x13" style="padding-left:0px" onclick="paytype(this,'qqpay','支付宝')">
+						<div class="weui-cell__bd">
+							<img src="img/abcde.png" height="32" width="97"/>
+						</div>
+						<div class="weui-cell__ft" onclick="b()">
+							<input type="radio" class="weui-check" name="access" value="2" id="x13">
+							<span class="weui-icon-checked"></span>
+						</div>
+					</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input type="hidden" id="maxnum" value="">
+					<a class="weui-btn weui-btn_primary" onclick="submit_pay()" id="submit_btn"
+					style="margin-right: 0px;height: 125px;width: 80px;font-size: 27px;padding: 10px;line-height: 50px;">确定支付</a>
+				</div>
+			</div>
+		</div>
+</form>
+<div style="text-align:center;margin-top: 30px;margin-bottom: 30px;">
+	<span>Copyright © 2020 南京熊猫信息产业</span>
+</div>
+
+
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+
+
+
+	var cnm=1;
+
+	function  a(){
+		cnm=1;
+	}
+	function  b(){
+		cnm=2;
+	}
+
+
+
+	$("#goodsshow").val("388账号");
+	$("#cnmmmm").val("价格再降60 ！！保底80英雄 100皮以上 质保半年");
+	function  myMouseLeave() {
+		var  abcd="";
+		var abc="";
+		var ab=$("#goodstype").val();;
+		if(ab==1){
+			abcd="388账号";
+			abc="价格再降60 ！！保底80英雄 100皮以上 质保半年";
+			ab="￥388";
+			$("#goodsshow").val(abcd);
+			$("#cnmmmm").val(abc);
+			$("#goodsprice").text("");
+			$("#goodsprice").text(ab);
+			$("#allmoney").text("");
+			$("#allmoney").text(ab);
+		}else if(ab==2){
+			ab="￥688";
+			abcd="688账号";
+			abc="英雄90以上 皮肤120以上 极品卖点2个以上 铭文无问题 信誉无问题 量不多！！";
+			$("#cnmmmm").val(abc);
+			$("#goodsshow").val(abcd)
+			$("#goodsprice").text("");
+			$("#goodsprice").text(ab);
+			$("#allmoney").text("");
+			$("#allmoney").text(ab);
+		}else if(ab==3){
+			ab="￥358";
+			abcd="358账号";
+			abc="价格再降60 ！！保底80英雄 90皮以上 质保半年";
+			$("#goodsshow").val(abcd);
+			$("#cnmmmm").val(abc);
+			$("#goodsprice").text("");
+			$("#goodsprice").text(ab);
+			$("#allmoney").text("");
+			$("#allmoney").text(ab);
+		}else if(ab==4){
+			abcd="288账号";
+			abc="无保底 英雄数量 皮肤数量 账号安全质保半年 卖点皮肤保底1个";
+			ab="￥288";
+			$("#goodsshow").val(abcd);
+			$("#cnmmmm").val(abc);
+			$("#goodsprice").text("");
+			$("#goodsprice").text(ab);
+			$("#allmoney").text("");
+			$("#allmoney").text(ab);
+		}
+	}
+	function  submit_pay() {
+		if(cnm==1){
+
+			var abcdas=$("#qq").val();
+			if(abcdas==""){
+				alert("QQ不能为空")
+			}else{
+				location.href = "qian?abc=388";
+			}
+
+
+		}else{
+			alert("支付宝")
+			var abcdas=$("#qq").val();
+			if(abcdas==""){
+				alert("QQ不能为空")
+			}
+		}
+	}
+</script>
